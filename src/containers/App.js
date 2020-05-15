@@ -5,6 +5,12 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component{
+  constructor(props){
+    super(props);
+    console.log('[app.js] constructor');
+    
+
+  }
   state = { persons:[
     {id:1,name:'deepa'},
     {id:2,name:'ashutosh'},
@@ -15,8 +21,55 @@ class App extends Component{
   ],
   showPerson: false
 }
+
+
+static getDerivedStateFromProps(props,state){
+
+  console.log('[app.js] getDerivedStateFromProp', props);
+
+  return state;
+  
+
+}
+// componentWillMount(){
+
+//   console.log('[app.js] componetWillMount() constructor');
+
+  
+
+// }
+
+componentDidMount(){
+
+  console.log('[app.js] componetDidMount() constructor');
+
+  
+
+} 
+shouldComponentUpdate(nextProps, nextState) {
+
+  console.log('[app.js] shouldComponentUpdate(nextProps, nextState)' );
+
+  return true;
+  
+
+}
+
+getSnapshotBeforeUpdate(prevProps,prevState){
+  console.log('[app.js] getSnapshotBeforUpdate' );
+  return {message:'snapshoddt'};
+}
+
+componentDidUpdate(prevProps,prevState,snapshot){
+  console.log('[app.js]  componentDidUpdate');
+
+  console.log( snapshot);
+
+  
+
+} 
 switch= ()=>{
-  console.log("juuguyyg");
+
   const doesPerson = this.state.showPerson
   this.setState({
    showPerson : !doesPerson
@@ -24,7 +77,7 @@ switch= ()=>{
 })
 
 }
-change= (event,id)=>{
+nameChangedHandler= (event,id)=>{
  const personsInd  = this.state.persons.findIndex(p=>{
  return p.id===id;
 });
@@ -51,6 +104,7 @@ deletHandler = (index)=>{
 
   render()
     {
+      console.log('[app.js] render ');
       let persons = null;
      
       if(this.state.showPerson){
