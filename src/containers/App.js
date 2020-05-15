@@ -1,7 +1,8 @@
 import React, { Component,useState } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-import Person from './Person/person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component{
   state = { persons:[
@@ -51,30 +52,31 @@ deletHandler = (index)=>{
   render()
     {
       let persons = null;
-      const style={}
+     
       if(this.state.showPerson){
         persons = (
-       
-          <div>{
-            this.state.persons.map((Persn,index)=>{
-            return  <Person  name={Persn.name} key={Persn.id} click={()=>{this.deletHandler(index)}} changed={(event)=>{this.change(event,Persn.id)} }></Person>
-            })
-            }
-               {/* <Person name={this.state.persons[0].name}  changed={this.change}></Person>
-               <Person name={this.state.persons[1].name}  changed={this.change}/>
-               <Person name="akhilesh"  changed={this.change}/> */}
-                </div>
+          <div>
+                
+          <Persons
+   persons={this.state.persons} 
+   clicked={this.deletPersonHandler}
+    changed={this.nameChangedHandler}/>
+    </div>
               
              
         )
-        style.backgroundColor = 'red';
+     
 
       } 
       return (
         <div className="App">
-          <h1>Learn Component</h1>
-          <button style={style} onClick={this.switch}>Switch</button>
+        <Cockpit
+        title={this.props.appTitle}
+        showPersons={this.state.showPerson}
+        persons={this.state.persons}
+        clicked={this.switch}/>
            {persons}
+
           </div>
       
         );
