@@ -1,4 +1,5 @@
-import React,{Component} from 'react';
+import React,{Component,Fragment} from 'react';
+import Aux from '../../../hoc/Aux';
 
 
 // const Person = (props)=>{
@@ -16,15 +17,54 @@ import React,{Component} from 'react';
 class Person extends Component{
     render(){
         console.log('[person.js] render....');
-        return (
+
+    //      return ( 
+    //    <React.Fragment>
+    //     <p>{this.props.id}</p>
+    //     <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
+    //     <p>{this.props.children}</p>
+    //     <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+    //     </React.Fragment>
+    //     )
+
+        return ( 
+            <Fragment>
+             <p>{this.props.id}</p>
+             <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
+             <p>{this.props.children}</p>
+             <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+             </Fragment>
+             )
+
+        //  return (
+        //    <Aux>
+        // <p>{this.props.id}</p>
+        // <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
+        // <p>{this.props.children}</p>
+        // <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+        // </Aux> 
+        // )
+
+        // return [
             
-        <div  className="person">
-        <p>{this.props.id}</p>
-        <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
-        <p>{this.props.children}</p>
-        <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
-        </div>
-        )
+         
+        //     <p key="i1">{this.props.id}</p>,
+        //     <p key="i2">Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>,
+        //     <p key="i3">{this.props.children}</p>,
+        //     <input key="i4" type="text"  onChange={this.props.changed} value={this.props.name}></input>
+         
+        // ];
+
+
+
+        // return ( 
+        // <div  className="person">
+        // <p>{this.props.id}</p>
+        // <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
+        // <p>{this.props.children}</p>
+        // <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+        // </div>
+        // )
 
     }
 
