@@ -1,5 +1,6 @@
 import React,{Component,Fragment} from 'react';
 import Aux from '../../../hoc/Aux';
+import WithClass from '../../../hoc/WithClass';
 
 
 // const Person = (props)=>{
@@ -27,23 +28,23 @@ class Person extends Component{
     //     </React.Fragment>
     //     )
 
-        return ( 
-            <Fragment>
-             <p>{this.props.id}</p>
-             <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
-             <p>{this.props.children}</p>
-             <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
-             </Fragment>
-             )
+        // return ( 
+        //     <Fragment>
+        //      <p>{this.props.id}</p>
+        //      <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
+        //      <p>{this.props.children}</p>
+        //      <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+        //      </Fragment>
+        //      )
 
-        //  return (
-        //    <Aux>
-        // <p>{this.props.id}</p>
-        // <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
-        // <p>{this.props.children}</p>
-        // <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
-        // </Aux> 
-        // )
+        return (
+           <Aux>
+        <p>{this.props.id}</p>
+        <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
+        <p>{this.props.children}</p>
+        <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+        </Aux> 
+        )
 
         // return [
             
@@ -71,4 +72,4 @@ class Person extends Component{
 }
 
 
-export default Person;
+export default WithClass(Person,"person");

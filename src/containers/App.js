@@ -3,6 +3,8 @@ import React, { Component,useState } from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+import  Aux from '../hoc/Aux';
 
 class App extends Component{
   constructor(props){
@@ -124,7 +126,24 @@ deletHandler = (index)=>{
 
       } 
       return (
-        <div className="App">
+        //-----------------Using WithClass----------------
+      //   <WithClass classes="App">
+      //     <button onClick={()=>{this.setState({showCockpit:false})}}>Remove</button>
+      //     { this.state.showCockpit ?
+      //   <Cockpit
+      //   title={this.props.appTitle}
+      //   showPersons={this.state.showPerson}
+      //   personsLength={this.state.persons.length}
+      //   clicked={this.switch}/>  : null
+      // }
+      //     {persons}
+         
+         
+
+      //     </WithClass>
+
+      //----------------------using wrapper--------------------
+        <Aux >
           <button onClick={()=>{this.setState({showCockpit:false})}}>Remove</button>
           { this.state.showCockpit ?
         <Cockpit
@@ -137,7 +156,7 @@ deletHandler = (index)=>{
          
          
 
-          </div>
+          </Aux>
       
         );
 
@@ -180,4 +199,4 @@ deletHandler = (index)=>{
   
 // }
 
-export default App;
+export default WithClass(App,"App");
