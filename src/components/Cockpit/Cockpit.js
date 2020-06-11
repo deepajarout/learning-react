@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useRef} from 'react';
+import AuthContext from '../../context/auth-context'
 
 const Cockpit = (props) =>{
+    const togglebtnRef =  useRef(null);
     
     useEffect(()=>{
         console.log("[cockpit.js] useEffect");
 
-   const timer = setTimeout(()=>{
-         alert("saved data ");
-        },1000);
+//    const timer = setTimeout(()=>{
+//          alert("saved data ");
+//         },1000);
+       togglebtnRef.current.click();
         return ()=>{
-             clearTimeout(timer);
+            //  clearTimeout(timer);
             console.log("[cockpit.js]  1st useEffect clean work")
                     };
     },[]);
@@ -37,7 +40,17 @@ const Cockpit = (props) =>{
     return(
         <div>
        <h1>Learn Component making {props.title}</h1>
-        <button style={style} onClick={props.clicked}>Switch</button>
+        <button style={style} 
+        ref={togglebtnRef}
+        onClick={props.clicked}>
+            Switch
+            </button>
+            <AuthContext.Consumer>
+                {(context)=>
+                    <button onClick= {context.login}>Log in</button>
+                }
+            
+            </AuthContext.Consumer>
         </div>
     )
 

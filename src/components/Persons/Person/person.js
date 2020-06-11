@@ -1,6 +1,8 @@
 import React,{Component,Fragment} from 'react';
 import Aux from '../../../hoc/Aux';
-import WithClass from '../../../hoc/WithClass';
+import WithClass from '../../../hoc/WithClass'; 
+import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context';
 
 
 // const Person = (props)=>{
@@ -16,6 +18,17 @@ import WithClass from '../../../hoc/WithClass';
 // }
 
 class Person extends Component{
+  
+    constructor(props ) {
+        super(props)
+        this.inputElementRef = React.createRef();
+    }
+    compountDidMount(){
+        
+        this.inputElementRef.current.focus();
+    //    this.inputElement.focus();
+    }
+
     render(){
         console.log('[person.js] render....');
 
@@ -39,10 +52,20 @@ class Person extends Component{
 
         return (
            <Aux>
+               <AuthContext.Consumer>
+             {(context)=> context.authenticated ? <p>Authenticated</p>:<p>Please login </p>}
+             </AuthContext.Consumer>
         <p>{this.props.id}</p>
         <p>Person Name :<b>{this.props.name} </b> {Math.random()*10}</p>
         <p>{this.props.children}</p>
-        <input type="text"  onChange={this.props.changed} value={this.props.name}></input>
+        <input type="text"
+
+        // ref={( inputEl )=>{ this.inputElement = inputEl}}   // old version
+
+          ref= {this.inputElementRef}
+          onChange={this.props.changed} 
+          value={this.props.name}></input>
+        
         </Aux> 
         )
 
@@ -70,6 +93,12 @@ class Person extends Component{
     }
 
 }
+
+Person.propTypes = {
+    id:PropTypes.number,
+    name: PropTypes.string,
+    changed : PropTypes.func
+};
 
 
 export default WithClass(Person,"person");

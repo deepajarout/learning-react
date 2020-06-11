@@ -5,6 +5,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../hoc/WithClass';
 import  Aux from '../hoc/Aux';
+import AuthContext from '../context/auth-context';
 
 class App extends Component{
   constructor(props){
@@ -22,7 +23,9 @@ class App extends Component{
     {id:6,name:'paritosh'}
   ],
   showPerson: false,
-  showCockpit: true
+  showCockpit: true,
+  changeCounter:0,
+  authenticated:false
 }
 
 
@@ -49,6 +52,7 @@ componentDidMount(){
   
 
 } 
+
 shouldComponentUpdate(nextProps, nextState) {
 
   console.log('[app.js] shouldComponentUpdate(nextProps, nextState)' );
@@ -91,7 +95,13 @@ console.log("person",perso);
 
   const person=[...this.state.persons];
   person[personsInd] = perso;
-  this.setState({persons:person});
+
+  this.setState((prevState,props)=>{
+  return  {
+    persons:person,
+    changeCounter: prevState.changeCounter+1
+  }
+  });
 }
 
 deletHandler = (index)=>{
@@ -104,6 +114,12 @@ deletHandler = (index)=>{
 
 }
 
+loginHandler = () => {
+ 
+  this.setState ({
+        authenticated : true
+  })
+}
 
   render()
     {
@@ -117,7 +133,8 @@ deletHandler = (index)=>{
           <Persons
    persons={this.state.persons} 
    clicked={this.deletPersonHandler}
-    changed={this.nameChangedHandler}/>
+    changed={this.nameChangedHandler}
+    isAuthenticated = {this.state.authenticated}/>
     </div>
               
              
@@ -145,16 +162,19 @@ deletHandler = (index)=>{
       //----------------------using wrapper--------------------
         <Aux >
           <button onClick={()=>{this.setState({showCockpit:false})}}>Remove</button>
+          <AuthContext.Provider value={{authenticated:this.state.authenticated,login:this.loginHandler}}>
           { this.state.showCockpit ?
         <Cockpit
         title={this.props.appTitle}
         showPersons={this.state.showPerson}
         personsLength={this.state.persons.length}
-        clicked={this.switch}/>  : null
+        clicked={this.switch}
+        // login={this.loginHandler}
+        />  : null
       }
           {persons}
          
-         
+          </AuthContext.Provider>
 
           </Aux>
       
